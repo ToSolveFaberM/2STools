@@ -1,0 +1,19 @@
+{
+  "name": "2stools-daq",
+  "version": "0.1.0",
+  "description": "Library with useful functions for our clients",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": ["2solve", "2stools"],
+  "author": "2Solve Engenharia e Tecnologia Ltda",
+  "license": "ISC",
+  "dependencies": {
+    "hex2dec": "^1.1.2",
+    "ieee-float": "^0.6.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
