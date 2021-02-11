@@ -9,6 +9,10 @@
   "keywords": ["2solve", "2stools"],
   "author": "2Solve Engenharia e Tecnologia Ltda",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2solve/2STools"
+  },
   "dependencies": {
     "hex2dec": "^1.1.2",
     "ieee-float": "^0.6.0"
