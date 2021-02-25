@@ -40,11 +40,24 @@ const mapping = {
     ModMasterNode9: [35, 2, null],
     ModMasterNode10: [36, 2, null],
     PN532_UID_size: [37, 1, null],
-    PN532_UID_ID: [38, 10, null],
+    PN532_UID: [38, 10, null],
     Exttemp1: [39, 4, null],
     Exttemp2: [40, 4, null],
     Exttemp3: [41, 4, null],
     Exttemp4: [42, 4, null],
+    DPS1_I2C_Temp: [43, 4, null],
+    DPS1_I2C_Press: [44, 4, null],
+    DPS2_I2C_Temp: [45, 4, null],
+    DPS2_I2C_Press: [46, 4, null],
+    DPS3_I2C_Temp: [47, 4, null],
+    DPS3_I2C_Press: [48, 4, null],
+    DPS4_I2C_Temp: [49, 4, null],
+    DPS4_I2C_Press: [50, 4, null],
+    GPS_Lat: [51, 4, null],
+    GPS_Lng: [52, 4, null],
+    GPS_sat: [53, 4, null],
+    GPS_alt: [54, 4, null],
+    GPS_kmph: [55, 4, null],
 }
 
 const mappingKeys = Object.getOwnPropertyNames(mapping);
@@ -96,5 +109,5 @@ exports.packetDecode = (data, offset = 0) => {
         json2sense[key] = variavel[2];
     }
 
-    return JSON.stringify(json2sense);
+    return json2sense;
 }
