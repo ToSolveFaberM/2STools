@@ -23,9 +23,9 @@ exports.mapping = {
   RC522_UID: [18, 10, null, "uint"],
   angleX_f: [19, 4, null, "float"],
   angleY_f: [20, 4, null, "float"],
-  DiInp: [21, 2, null, "uint"],
-  PulInp: [22, 4, null, "uint"],
-  FreInp: [23, 2, null, "uint"],
+  Dilnp0: [21, 2, null, "uint"],
+  Pullnp0: [22, 4, null, "uint"],
+  FreInp0: [23, 2, null, "uint"],
   Vec_en_at_di: [24, 3, null, "uint"],
   Vec_en_re_in: [25, 3, null, "uint"],
   Vec_en_re_ca: [26, 3, null, "uint"],
@@ -58,6 +58,9 @@ exports.mapping = {
   GPS_sat: [53, 1, null, "uint"],
   GPS_alt: [54, 4, null, "float"],
   GPS_kmph: [55, 4, null, "float"],
+  Dilnp1: [56, 2, null, "uint"],
+  Pullnp1: [57, 8, null, "uint"],
+  FreInp1: [58, 2, null, "uint"],
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
