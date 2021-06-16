@@ -24,7 +24,7 @@ exports.mapping = {
   angleX_f: [19, 4, null, "float"],
   angleY_f: [20, 4, null, "float"],
   Dilnp0: [21, 2, null, "uint"],
-  Pullnp0: [22, 4, null, "uint"],
+  Pullnp0: [22, 8, null, "uint"],
   FreInp0: [23, 2, null, "uint"],
   Vec_en_at_di: [24, 3, null, "uint"],
   Vec_en_re_in: [25, 3, null, "uint"],
