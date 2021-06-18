@@ -61,6 +61,8 @@ exports.mapping = {
   Dilnp1: [56, 2, null, "uint"],
   Pullnp1: [57, 8, null, "uint"],
   FreInp1: [58, 2, null, "uint"],
+  IntInp0: [59, 4, null, "uint"],
+  IntInp1: [60, 4, null, "uint"],
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
