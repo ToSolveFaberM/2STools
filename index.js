@@ -63,6 +63,21 @@ exports.mapping = {
   FreInp1: [58, 2, null, "uint"],
   IntInp0: [59, 4, null, "uint"],
   IntInp1: [60, 4, null, "uint"],
+  MPM_temp: [61, 4, null, "float"],
+  MPM_press: [62, 4, null, "float"],
+  APDS_Red: [63, 2, null, "uint"],
+  APDS_Blue: [64, 2, null, "uint"],
+  APDS_Green: [65, 2, null, "uint"],
+  APDS_Clear: [66, 2, null, "uint"],
+  MLX_OBJTemp: [67, 4, null, "float"],
+  MLX_AMBTemp: [68, 4, null, "float"],
+  resetCause: [69, 1, null, "uint"],
+  vibr_peak_freq: [70, 4, null, "float"],
+  vibr_peak_accel: [71, 4, null, "float"],
+  vibr_accel_rms: [72, 4, null, "float"],
+  vibr_vel_rms: [73, 4, null, "float"],
+  vibr_disp_rms: [74, 4, null, "float"],
+  LIDARLiteDist: [75, 2, null, "uint"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
