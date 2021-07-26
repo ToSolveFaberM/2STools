@@ -1,6 +1,8 @@
 const { hexToDec } = require("hex2dec");
 const { readFloatBE } = require("ieee-float");
 
+
+// Sensors list 
 exports.mapping = {
   ToSenseID: [0, 2, null, "uint"],
   counter: [1, 2, null, "uint"],
