@@ -1,3 +1,4 @@
+'use strict';
 const { hexToDec } = require("hex2dec");
 const { readFloatBE } = require("ieee-float");
 
@@ -84,7 +85,45 @@ exports.mapping = {
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
 
-exports.packetDecode = (data, offset = 0) => {
+
+
+exports.packetDecode = (rawdata, offset = 0) => {
+
+const obj = JSON.parse(rawdata);
+//console.log(obj)
+
+try {
+    var aux = obj.data.uplink_message.frm_payload + "" 
+  //  console.log(aux)
+  }
+  catch {
+      try{
+        var aux = obj.params.payload + "" 
+        //console.log(aux)
+      } 
+      catch{  
+           console.log("Error, payload not found!")
+    }
+}
+
+  
+let buff = new Buffer(aux, 'base64');
+//let text = buff.toString('ascii');
+
+var payload = "";
+//console.log(buff)
+
+
+for(var j=0; j<buff.length; j++)
+{
+    if(buff[j]<= 0x0F)    payload += '0';
+    
+    payload += buff[j].toString(16);
+}
+
+
+const data = payload + ""
+
   const isHex = /^[0-9a-fA-F]+$/;
 
   if (typeof data !== "string" || !isHex.test(data)) {
@@ -111,6 +150,7 @@ exports.packetDecode = (data, offset = 0) => {
     const key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
     const variavel = this.mapping[key];
 
+    
     if (variavel[3] === "float") {
       variavel[2] = data.substring(i, i + variavel[1] * 2);
 
@@ -131,5 +171,9 @@ exports.packetDecode = (data, offset = 0) => {
     json2sense[key] = variavel[2];
   }
 
-  return json2sense;
+  
+  var decodedObj = {...obj, json2sense}
+
+
+  return decodedObj;
 };
