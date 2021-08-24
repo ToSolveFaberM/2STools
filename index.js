@@ -1,4 +1,3 @@
-'use strict';
 const { hexToDec } = require("hex2dec");
 const { readFloatBE } = require("ieee-float");
 
