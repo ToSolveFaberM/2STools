@@ -79,7 +79,17 @@ exports.mapping = {
   vibr_accel_rms: [72, 4, null, "float"],
   vibr_vel_rms: [73, 4, null, "float"],
   vibr_disp_rms: [74, 4, null, "float"],
-  LIDARLiteDist: [75, 2, null, "uint"]
+  LIDARLiteDist: [75, 2, null, "uint"],
+  kx_ax: [76, 4, null, "float"],
+  kx_ay: [77, 4, null, "float"],
+  kx_az: [78, 4, null, "float"],
+  kx_vibr_peak_freq:[79, 4, null, "float"],
+  kx_vibr_peak_accel:[80, 4, null, "float"],
+  kx_vibr_accel_rms:[81, 4, null, "float"],
+  kx_vibr_vel_rms:[82, 4, null, "float"],
+  kx_vibr_disp_rms:[83, 4, null, "float"],
+  nansenID: [84, 5, null, "uint"],
+  Vec_en_at_rev: [85, 3, null, "uint"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
@@ -98,11 +108,15 @@ try {
       try{
         var aux = obj.params.payload + "" 
       } 
-      catch{  
+      catch{ 
+        try{
+          var aux = obj.data + ""
+      }
+      catch {
            console.log("Error, payload not found!")
+      }
     }
 }
-
   
 let buff = new Buffer(aux, 'base64');
 
