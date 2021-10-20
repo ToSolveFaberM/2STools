@@ -90,6 +90,7 @@ exports.mapping = {
   kx_vibr_disp_rms:[83, 4, null, "float"],
   nansenID: [84, 5, null, "uint"],
   Vec_en_at_rev: [85, 3, null, "uint"]
+
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
@@ -117,6 +118,7 @@ try {
       }
     }
 }
+
   
 let buff = new Buffer(aux, 'base64');
 
@@ -182,99 +184,6 @@ const data = payload + ""
 
   
 var decodedObj = {...obj, json2sense}
-
-
-  return decodedObj;
-};
-
-
-
-exports.packetDecode = (rawdata, offset = 0) => {
-
-const obj = JSON.parse(rawdata);
-//console.log(obj)
-
-try {
-    var aux = obj.data.uplink_message.frm_payload + "" 
-  //  console.log(aux)
-  }
-  catch {
-      try{
-        var aux = obj.params.payload + "" 
-        //console.log(aux)
-      } 
-      catch{  
-           console.log("Error, payload not found!")
-    }
-}
-
-  
-let buff = new Buffer(aux, 'base64');
-//let text = buff.toString('ascii');
-
-var payload = "";
-//console.log(buff)
-
-
-for(var j=0; j<buff.length; j++)
-{
-    if(buff[j]<= 0x0F)    payload += '0';
-    
-    payload += buff[j].toString(16);
-}
-
-
-const data = payload + ""
-
-  const isHex = /^[0-9a-fA-F]+$/;
-
-  if (typeof data !== "string" || !isHex.test(data)) {
-    throw new TypeError("Data format must be a hexadecimal string");
-  }
-
-  if (typeof offset !== "number" || !(offset % 1 === 0)) {
-    throw new TypeError("Offset format must be a positive integer number");
-  }
-
-  if (offset < 0 || offset > data.length) {
-    throw new TypeError("Wrong offset value");
-  }
-
-  let json2sense = {};
-  let i = offset;
-
-  const vetor2sense = [];
-
-  while (i < data.length - 5) {
-    let id = parseInt(hexToDec(data.substring(i, i + 4)));
-    i += 4;
-
-    const key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
-    const variavel = this.mapping[key];
-
-    
-    if (variavel[3] === "float") {
-      variavel[2] = data.substring(i, i + variavel[1] * 2);
-
-      const teai = [
-        parseInt(hexToDec(variavel[2].substring(0, 2))),
-        parseInt(hexToDec(variavel[2].substring(2, 4))),
-        parseInt(hexToDec(variavel[2].substring(4, 6))),
-        parseInt(hexToDec(variavel[2].substring(6, 8))),
-      ];
-
-      variavel[2] = readFloatBE(teai).toFixed(4);
-    } else {
-      variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
-    }
-
-    i += variavel[1] * 2;
-    vetor2sense.push(variavel);
-    json2sense[key] = variavel[2];
-  }
-
-  
-  var decodedObj = {...obj, json2sense}
 
 
   return decodedObj;
