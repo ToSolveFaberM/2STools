@@ -89,7 +89,18 @@ exports.mapping = {
   kx_vibr_vel_rms:[82, 4, null, "float"],
   kx_vibr_disp_rms:[83, 4, null, "float"],
   nansenID: [84, 5, null, "uint"],
-  Vec_en_at_rev: [85, 3, null, "uint"]
+  Vec_en_at_rev: [85, 3, null, "uint"],
+  dsm_concentration: [86, 4, null, "float"],
+  ModMasterNode1_32_ID: [87, 4, null, "uint"],
+  ModMasterNode2_32_ID: [88, 4, null, "uint"],
+  ModMasterNode3_32_ID: [89, 4, null, "uint"], 
+  ModMasterNode4_32_ID: [90, 4, null, "uint"], 
+  ModMasterNode5_32_ID: [91, 4, null, "uint"], 
+  ModMasterNode6_32_ID: [92, 4, null, "uint"], 
+  ModMasterNode7_32_ID: [93, 4, null, "uint"], 
+  ModMasterNode8_32_ID: [94, 4, null, "uint"], 
+  ModMasterNode9_32_ID: [95, 4, null, "uint"], 
+  ModMasterNode10_32_ID: [96, 4, null, "uint"]
 
 };
 
