@@ -6,7 +6,7 @@ const { readFloatBE } = require("ieee-float");
 exports.mapping = {
   ToSenseID: [0, 2, null, "uint"],
   counter: [1, 2, null, "uint"],
-  epoch: [2, 4, null, "float"],
+  epoch: [2, 4, null, "uint"],
   BatteryMon: [3, 4, null, "float"],
   temp: [4, 4, null, "float"],
   AI1: [5, 3, null, "uint"],
