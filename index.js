@@ -83,23 +83,23 @@ exports.mapping = {
   kx_ax: [76, 4, null, "float"],
   kx_ay: [77, 4, null, "float"],
   kx_az: [78, 4, null, "float"],
-  kx_vibr_peak_freq:[79, 4, null, "float"],
-  kx_vibr_peak_accel:[80, 4, null, "float"],
-  kx_vibr_accel_rms:[81, 4, null, "float"],
-  kx_vibr_vel_rms:[82, 4, null, "float"],
-  kx_vibr_disp_rms:[83, 4, null, "float"],
+  kx_vibr_peak_freq: [79, 4, null, "float"],
+  kx_vibr_peak_accel: [80, 4, null, "float"],
+  kx_vibr_accel_rms: [81, 4, null, "float"],
+  kx_vibr_vel_rms: [82, 4, null, "float"],
+  kx_vibr_disp_rms: [83, 4, null, "float"],
   nansenID: [84, 5, null, "uint"],
   Vec_en_at_rev: [85, 3, null, "uint"],
   dsm_concentration: [86, 4, null, "float"],
   ModMasterNode1_32_ID: [87, 4, null, "uint"],
   ModMasterNode2_32_ID: [88, 4, null, "uint"],
-  ModMasterNode3_32_ID: [89, 4, null, "uint"], 
-  ModMasterNode4_32_ID: [90, 4, null, "uint"], 
-  ModMasterNode5_32_ID: [91, 4, null, "uint"], 
-  ModMasterNode6_32_ID: [92, 4, null, "uint"], 
-  ModMasterNode7_32_ID: [93, 4, null, "uint"], 
-  ModMasterNode8_32_ID: [94, 4, null, "uint"], 
-  ModMasterNode9_32_ID: [95, 4, null, "uint"], 
+  ModMasterNode3_32_ID: [89, 4, null, "uint"],
+  ModMasterNode4_32_ID: [90, 4, null, "uint"],
+  ModMasterNode5_32_ID: [91, 4, null, "uint"],
+  ModMasterNode6_32_ID: [92, 4, null, "uint"],
+  ModMasterNode7_32_ID: [93, 4, null, "uint"],
+  ModMasterNode8_32_ID: [94, 4, null, "uint"],
+  ModMasterNode9_32_ID: [95, 4, null, "uint"],
   ModMasterNode10_32_ID: [96, 4, null, "uint"]
 
 };
@@ -110,41 +110,40 @@ exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
 
 exports.packetDecode = (rawdata, offset = 0) => {
 
-const obj = JSON.parse(rawdata);
+  const obj = JSON.parse(rawdata);
 
 
-try {
-    var aux = obj.data.uplink_message.frm_payload + "" 
+  try {
+    var aux = obj.data.uplink_message.frm_payload + ""
   }
-  catch {
-      try{
-        var aux = obj.params.payload + "" 
-      } 
-      catch{ 
-        try{
-          var aux = obj.data + ""
+  catch (err) {
+    try {
+      var aux = obj.params.payload + ""
+    }
+    catch (err) {
+      try {
+        var aux = obj.data + ""
       }
-      catch {
-           console.log("Error, payload not found!")
+      catch (err) {
+        console.log("Error: ", err)
       }
     }
-}
-
-  
-let buff = new Buffer(aux, 'base64');
-
-var payload = "";
+  }
 
 
-for(var j=0; j<buff.length; j++)
-{
-    if(buff[j]<= 0x0F)    payload += '0';
-    
+  let buff = new Buffer(aux, 'base64');
+
+  var payload = "";
+
+
+  for (var j = 0; j < buff.length; j++) {
+    if (buff[j] <= 0x0F) payload += '0';
+
     payload += buff[j].toString(16);
-}
+  }
 
 
-const data = payload + ""
+  const data = payload + ""
 
   const isHex = /^[0-9a-fA-F]+$/;
 
@@ -172,7 +171,7 @@ const data = payload + ""
     const key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
     const variavel = this.mapping[key];
 
-    
+
     if (variavel[3] === "float") {
       variavel[2] = data.substring(i, i + variavel[1] * 2);
 
@@ -193,8 +192,8 @@ const data = payload + ""
     json2sense[key] = variavel[2];
   }
 
-  
-var decodedObj = {...obj, json2sense}
+
+  var decodedObj = { ...obj, json2sense }
 
 
   return decodedObj;
