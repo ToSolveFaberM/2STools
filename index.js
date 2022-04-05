@@ -1,6 +1,14 @@
 const { hexToDec } = require("hex2dec");
 const { readFloatBE } = require("ieee-float");
 
+function isJson(str) {
+  try {
+      JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
+  return true;
+}
 
 // Sensors list 
 exports.mapping = {
@@ -112,38 +120,43 @@ exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
 
 exports.packetDecode = (rawdata, offset = 0) => {
 
-  const obj = JSON.parse(rawdata);
+  let obj;
+  let json = isJson(rawdata);
+  var payload = "";
 
+  if(json){
 
-  try {
-    var aux = obj.data.uplink_message.frm_payload + ""
-  }
-  catch (err) {
+    obj = JSON.parse(rawdata);
+
     try {
-      var aux = obj.params.payload + ""
+          var aux = obj.data.uplink_message.frm_payload + ""
     }
     catch (err) {
       try {
-        var aux = obj.data + ""
+        var aux = obj.params.payload + ""
       }
       catch (err) {
-        console.log("Error: ", err)
+        try {
+          var aux = obj.data + ""
+        }
+        catch (err) {
+          console.log("Error: ", err)
+        }
       }
     }
+
+
+    let buff = new Buffer(aux, 'base64');
+    
+    for (var j = 0; j < buff.length; j++) {
+          if (buff[j] <= 0x0F) payload += '0';
+
+          payload += buff[j].toString(16);
+        }
   }
-
-
-  let buff = new Buffer(aux, 'base64');
-
-  var payload = "";
-
-
-  for (var j = 0; j < buff.length; j++) {
-    if (buff[j] <= 0x0F) payload += '0';
-
-    payload += buff[j].toString(16);
+  else{
+      payload = rawdata;
   }
-
 
   const data = payload + ""
 
