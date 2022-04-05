@@ -100,7 +100,9 @@ exports.mapping = {
   ModMasterNode7_32_ID: [93, 4, null, "uint"],
   ModMasterNode8_32_ID: [94, 4, null, "uint"],
   ModMasterNode9_32_ID: [95, 4, null, "uint"],
-  ModMasterNode10_32_ID: [96, 4, null, "uint"]
+  ModMasterNode10_32_ID: [96, 4, null, "uint"],
+  PulseInp: [97, 8, null, "uint"],
+  PulseInp1: [98, 8, null, "uint"]
 
 };
 
@@ -165,36 +167,41 @@ exports.packetDecode = (rawdata, offset = 0) => {
   const vetor2sense = [];
 
   while (i < data.length - 5) {
-    let id = parseInt(hexToDec(data.substring(i, i + 4)));
-    i += 4;
 
-    const key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
-    const variavel = this.mapping[key];
+    let id = parseInt(hexToDec(data.substring(i, i + 4))); //id precisa estar entre 0 e 99, a substring ta vindo errada no caso dado
 
+    if(id < this.mappingKeys.length){
+      i += 4;
+      let key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
 
-    if (variavel[3] === "float") {
-      variavel[2] = data.substring(i, i + variavel[1] * 2);
-
-      const teai = [
-        parseInt(hexToDec(variavel[2].substring(0, 2))),
-        parseInt(hexToDec(variavel[2].substring(2, 4))),
-        parseInt(hexToDec(variavel[2].substring(4, 6))),
-        parseInt(hexToDec(variavel[2].substring(6, 8))),
-      ];
-
-      variavel[2] = readFloatBE(teai).toFixed(4);
-    } else {
-      variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
-    }
-
-    i += variavel[1] * 2;
-    vetor2sense.push(variavel);
-    json2sense[key] = variavel[2];
+      const variavel = this.mapping[key];
+  
+      // console.log(obj.data)
+      // console.log("AGR", "while", data, data.length, data.substring(i, i + 4), id, key, variavel)
+  
+      if (variavel[3] === "float") {
+        variavel[2] = data.substring(i, i + variavel[1] * 2);
+  
+        const teai = [
+          parseInt(hexToDec(variavel[2].substring(0, 2))),
+          parseInt(hexToDec(variavel[2].substring(2, 4))),
+          parseInt(hexToDec(variavel[2].substring(4, 6))),
+          parseInt(hexToDec(variavel[2].substring(6, 8))),
+        ];
+  
+        variavel[2] = readFloatBE(teai).toFixed(4);
+      } else {
+        variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
+      }
+  
+      i += variavel[1] * 2;
+      vetor2sense.push(variavel);
+      json2sense[key] = variavel[2];
+    }else i++;
   }
 
 
   var decodedObj = { ...obj, json2sense }
-
 
   return decodedObj;
 };
