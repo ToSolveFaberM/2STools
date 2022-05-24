@@ -110,13 +110,44 @@ exports.mapping = {
   ModMasterNode9_32_ID: [95, 4, null, "uint"],
   ModMasterNode10_32_ID: [96, 4, null, "uint"],
   PulseInp: [97, 8, null, "uint"],
-  PulseInp1: [98, 8, null, "uint"]
+  PulseInp1: [98, 8, null, "uint"],
 
+  DI1_DM: [0x8000, 1, null, "uint"],
+  DI2_DM: [0x8001, 1, null, "uint"],
+  DI3_DM: [0x8002, 1, null, "uint"],
+  
+  DO1_DM: [0x8003, 1, null, "uint"],
+  DO2_DM: [0x8004, 1, null, "uint"],
+  DO3_DM: [0x8005, 1, null, "uint"],
+  DO4_DM: [0x8006, 1, null, "uint"],
+  DO5_DM: [0x8007, 1, null, "uint"],
+  DO6_DM: [0x8008, 1, null, "uint"],
+  DO7_DM: [0x8009, 1, null, "uint"],
+  DO8_DM: [0x8010, 1, null, "uint"],
+  DO9_DM: [0x8011, 1, null, "uint"],
+  DO10_DM: [0x8012, 1, null, "uint"],
+  DO11_DM: [0x8013, 1, null, "uint"],
+  DO12_DM: [0x8014, 1, null, "uint"],
+  DO13_DM: [0x8015, 1, null, "uint"],
+  DO14_DM: [0x8016, 1, null, "uint"],
+
+  AI1_DM: [0x8017, 4, "float"],
+  AI2_DM: [0x8018, 4, "float"],
+  AI3_DM: [0x8019, 4, "float"],
+  AI4_DM: [0x8020, 4, "float"],
+  AI5_DM: [0x8021, 4, "float"],
+  AI6_DM: [0x8022, 4, "float"],
+
+  Temperatura_DM: [0x8023, 4, "float"],
+  Rate_DM: [0x8024, 4, "float"],
+  Freq_DM: [0x8025, 4, "float"],
+
+  Diario_DM: [0x8026, 8, null, "uint"],
+  Hist_DM: [0x8027, 8, null, "uint"],
+  Total_DM: [0x8028, 8, null, "uint"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
-
-
 
 exports.packetDecode = (rawdata, offset = 0) => {
 
