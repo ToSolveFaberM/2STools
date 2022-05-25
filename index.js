@@ -214,7 +214,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
 
     let id = parseInt(hexToDec(data.substring(i, i + 4))); //id precisa estar entre 0 e 99, a substring ta vindo errada no caso dado
 
-    if(id < this.mappingKeys.length){
+    if(id){ //era (id < this.mappingKeys.length)
       i += 4;
       let key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
 
