@@ -1,13 +1,13 @@
 const { hexToDec } = require("hex2dec");
 const { readFloatBE } = require("ieee-float");
 
-function isJson(str) {
+function isJson(str){
   try {
-      JSON.parse(str);
+    var json = JSON.parse(str);
+    return (typeof json === 'object' && typeof str === 'string');
   } catch (e) {
-      return false;
+    return false;
   }
-  return true;
 }
 
 // Sensors list 
@@ -111,11 +111,9 @@ exports.mapping = {
   ModMasterNode10_32_ID: [96, 4, null, "uint"],
   PulseInp: [97, 8, null, "uint"],
   PulseInp1: [98, 8, null, "uint"],
-
   DI1_DM: [0x8000, 1, null, "uint"],
   DI2_DM: [0x8001, 1, null, "uint"],
   DI3_DM: [0x8002, 1, null, "uint"],
-  
   DO1_DM: [0x8003, 1, null, "uint"],
   DO2_DM: [0x8004, 1, null, "uint"],
   DO3_DM: [0x8005, 1, null, "uint"],
@@ -130,18 +128,15 @@ exports.mapping = {
   DO12_DM: [0x8014, 1, null, "uint"],
   DO13_DM: [0x8015, 1, null, "uint"],
   DO14_DM: [0x8016, 1, null, "uint"],
-
   AI1_DM: [0x8017, 4, "float"],
   AI2_DM: [0x8018, 4, "float"],
   AI3_DM: [0x8019, 4, "float"],
   AI4_DM: [0x8020, 4, "float"],
   AI5_DM: [0x8021, 4, "float"],
   AI6_DM: [0x8022, 4, "float"],
-
   Temperatura_DM: [0x8023, 4, "float"],
   Rate_DM: [0x8024, 4, "float"],
   Freq_DM: [0x8025, 4, "float"],
-
   Diario_DM: [0x8026, 8, null, "uint"],
   Hist_DM: [0x8027, 8, null, "uint"],
   Total_DM: [0x8028, 8, null, "uint"]
@@ -153,6 +148,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
 
   let obj;
   let json = isJson(rawdata);
+  console.log("isJson", json)
   var payload = "";
 
   if(json){
