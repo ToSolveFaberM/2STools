@@ -134,10 +134,10 @@ exports.mapping = {
   AI4_DM: [0x8020, 4, "float"],
   AI5_DM: [0x8021, 4, "float"],
   AI6_DM: [0x8022, 4, "float"],
-  Temperatura_DM: [0x8023, 4, "float"],
+  Temp_DM: [0x8023, 4, "float"],
   Rate_DM: [0x8024, 4, "float"],
   Freq_DM: [0x8025, 4, "float"],
-  Diario_DM: [0x8026, 8, null, "uint"],
+  TP_DM: [0x8026, 8, null, "uint"],
   Hist_DM: [0x8027, 8, null, "uint"],
   Total_DM: [0x8028, 8, null, "uint"]
 };
@@ -148,7 +148,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
 
   let obj;
   let json = isJson(rawdata);
-  console.log("isJson", json)
+
   var payload = "";
 
   if(json){
@@ -167,7 +167,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
           var aux = obj.data + ""
         }
         catch (err) {
-          console.log("Error: ", err)
+          console.error("Error: ", err)
         }
       }
     }
@@ -215,9 +215,6 @@ exports.packetDecode = (rawdata, offset = 0) => {
       let key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
 
       const variavel = this.mapping[key];
-  
-      // console.log(obj.data)
-      // console.log("AGR", "while", data, data.length, data.substring(i, i + 4), id, key, variavel)
   
       if (variavel[3] === "float") {
         variavel[2] = data.substring(i, i + variavel[1] * 2);
