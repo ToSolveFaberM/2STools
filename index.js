@@ -1,7 +1,7 @@
 const { hexToDec } = require("hex2dec");
 const { readFloatBE } = require("ieee-float");
 
-function isJson(str){
+function isJson(str) {
   try {
     var json = JSON.parse(str);
     return (typeof json === 'object' && typeof str === 'string');
@@ -99,18 +99,48 @@ exports.mapping = {
   nansenID: [84, 5, null, "uint"],
   Vec_en_at_rev: [85, 3, null, "uint"],
   dsm_concentration: [86, 4, null, "float"],
-  ModMasterNode1_32_ID: [87, 4, null, "uint"],
-  ModMasterNode2_32_ID: [88, 4, null, "uint"],
-  ModMasterNode3_32_ID: [89, 4, null, "uint"],
-  ModMasterNode4_32_ID: [90, 4, null, "uint"],
-  ModMasterNode5_32_ID: [91, 4, null, "uint"],
-  ModMasterNode6_32_ID: [92, 4, null, "uint"],
-  ModMasterNode7_32_ID: [93, 4, null, "uint"],
-  ModMasterNode8_32_ID: [94, 4, null, "uint"],
-  ModMasterNode9_32_ID: [95, 4, null, "uint"],
-  ModMasterNode10_32_ID: [96, 4, null, "uint"],
+  ModMasterNode1_32: [87, 4, null, "uint"],
+  ModMasterNode2_32: [88, 4, null, "uint"],
+  ModMasterNode3_32: [89, 4, null, "uint"],
+  ModMasterNode4_32: [90, 4, null, "uint"],
+  ModMasterNode5_32: [91, 4, null, "uint"],
+  ModMasterNode6_32: [92, 4, null, "uint"],
+  ModMasterNode7_32: [93, 4, null, "uint"],
+  ModMasterNode8_32: [94, 4, null, "uint"],
+  ModMasterNode9_32: [95, 4, null, "uint"],
+  ModMasterNode10_3D: [96, 4, null, "uint"],
   PulseInp: [97, 8, null, "uint"],
   PulseInp1: [98, 8, null, "uint"],
+  ModMasterNode1Signed: [99, 2, null, "int16"],
+  ModMasterNode2Signed: [100, 2, null, "int16"],
+  ModMasterNode3Signed: [101, 2, null, "int16"],
+  ModMasterNode4Signed: [102, 2, null, "int16"],
+  ModMasterNode5Signed: [103, 2, null, "int16"],
+  ModMasterNode6Signed: [104, 2, null, "int16"],
+  ModMasterNode7Signed: [105, 2, null, "int16"],
+  ModMasterNode8Signed: [106, 2, null, "int16"],
+  ModMasterNode9Signed: [107, 2, null, "int16"],
+  ModMasterNode10Signed: [108, 2, null, "int16"],
+  ModMasterNode1Signed_32: [109, 4, null, "int32"],
+  ModMasterNode2Signed_32: [110, 4, null, "int32"],
+  ModMasterNode3Signed_32: [111, 4, null, "int32"],
+  ModMasterNode4Signed_32: [112, 4, null, "int32"],
+  ModMasterNode5Signed_32: [113, 4, null, "int32"],
+  ModMasterNode6Signed_32: [114, 4, null, "int32"],
+  ModMasterNode7Signed_32: [115, 4, null, "int32"],
+  ModMasterNode8Signed_32: [116, 4, null, "int32"],
+  ModMasterNode9Signed_32: [117, 4, null, "int32"],
+  ModMasterNode10Signed_32: [118, 4, null, "int32"],
+  ModMasterNode1Float_32: [119, 4, null, "int32"],
+  ModMasterNode2Float_32: [120, 4, null, "int32"],
+  ModMasterNode3Float_32: [121, 4, null, "int32"],
+  ModMasterNode4Float_32: [122, 4, null, "int32"],
+  ModMasterNode5Float_32: [123, 4, null, "int32"],
+  ModMasterNode6Float_32: [124, 4, null, "int32"],
+  ModMasterNode7Float_32: [125, 4, null, "int32"],
+  ModMasterNode8Float_32: [126, 4, null, "int32"],
+  ModMasterNode9Float_32: [127, 4, null, "int32"],
+  ModMasterNode10Float_32: [128, 4, null, "int32"],
   DI1_DM: [0x8000 + 0, 1, null, "uint"],
   DI2_DM: [0x8000 + 1, 1, null, "uint"],
   DI3_DM: [0x8000 + 2, 1, null, "uint"],
@@ -151,12 +181,12 @@ exports.packetDecode = (rawdata, offset = 0) => {
 
   var payload = "";
 
-  if(json){
+  if (json) {
 
     obj = JSON.parse(rawdata);
 
     try {
-          var aux = obj.data.uplink_message.frm_payload + ""
+      var aux = obj.data.uplink_message.frm_payload + ""
     }
     catch (err) {
       try {
@@ -174,15 +204,15 @@ exports.packetDecode = (rawdata, offset = 0) => {
 
 
     let buff = new Buffer(aux, 'base64');
-    
-    for (var j = 0; j < buff.length; j++) {
-          if (buff[j] <= 0x0F) payload += '0';
 
-          payload += buff[j].toString(16);
-        }
+    for (var j = 0; j < buff.length; j++) {
+      if (buff[j] <= 0x0F) payload += '0';
+
+      payload += buff[j].toString(16);
+    }
   }
-  else{
-      payload = rawdata;
+  else {
+    payload = rawdata;
   }
 
   const data = payload + ""
@@ -210,31 +240,46 @@ exports.packetDecode = (rawdata, offset = 0) => {
 
     let id = parseInt(hexToDec(data.substring(i, i + 4))); //id precisa estar entre 0 e 99, a substring ta vindo errada no caso dado
 
-    if(id){ //era (id < this.mappingKeys.length)
+    if (id < this.mappingKeys.length || id >= 0x8000) {
       i += 4;
       let key = this.mappingKeys.find((key) => id === this.mapping[key][0]);
 
       const variavel = this.mapping[key];
-  
-      if (variavel[3] === "float") {
-        variavel[2] = data.substring(i, i + variavel[1] * 2);
-  
-        const teai = [
-          parseInt(hexToDec(variavel[2].substring(0, 2))),
-          parseInt(hexToDec(variavel[2].substring(2, 4))),
-          parseInt(hexToDec(variavel[2].substring(4, 6))),
-          parseInt(hexToDec(variavel[2].substring(6, 8))),
-        ];
-  
-        variavel[2] = readFloatBE(teai).toFixed(4);
-      } else {
-        variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
+
+      switch (variavel[3]) {
+        case "float":
+          variavel[2] = data.substring(i, i + variavel[1] * 2);
+
+          const teai = [
+            parseInt(hexToDec(variavel[2].substring(0, 2))),
+            parseInt(hexToDec(variavel[2].substring(2, 4))),
+            parseInt(hexToDec(variavel[2].substring(4, 6))),
+            parseInt(hexToDec(variavel[2].substring(6, 8))),
+          ];
+
+          variavel[2] = readFloatBE(teai).toFixed(4);
+
+          break;
+        case "uint":
+          variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
+
+          break;
+        case "int16":
+          variavel[2] = (hexToDec(data.substring(i, i + variavel[1] * 2)) << 16) >> 16;
+
+          break;
+        case "int32":
+          variavel[2] = (hexToDec(data.substring(i, i + variavel[1] * 2)) << 32) >> 32;
+
+          break;
+        default:
+          break;
       }
-  
+
       i += variavel[1] * 2;
       vetor2sense.push(variavel);
       json2sense[key] = variavel[2];
-    }else i++;
+    } else i++;
   }
 
 
