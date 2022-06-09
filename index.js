@@ -215,7 +215,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
     payload = rawdata;
   }
 
-  const data = payload + ""
+  const data = (payload.toString()).trim()
 
   const isHex = /^[0-9a-fA-F]+$/;
 
