@@ -192,7 +192,12 @@ exports.packetDecode = (rawdata, offset = 0) => {
             return obj;
         }
         var aux;
-        if (obj.hasOwnProperty('data')) {
+        if (obj.hasOwnProperty('uplink_message')) {
+            if (obj.uplink_message.hasOwnProperty('frm_payload')) {
+                aux = obj.uplink_message.frm_payload + "";
+            }
+        } 
+        else if (obj.hasOwnProperty('data')) {
             if (obj.data.hasOwnProperty('uplink_message')) {
                 if (obj.data.uplink_message.hasOwnProperty('frm_payload')) {
                     aux = obj.data.uplink_message.frm_payload + "";
@@ -221,6 +226,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
         payload = rawdata;
     }
 
+	console.log(payload)
     const data = (payload.toString()).trim()
 
     const isHex = /^[0-9a-fA-F]+$/;
