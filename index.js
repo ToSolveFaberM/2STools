@@ -192,7 +192,10 @@ exports.packetDecode = (rawdata, offset = 0) => {
             return obj;
         }
         var aux;
-        if (obj.hasOwnProperty('uplink_message')) {
+        if(obj.hasOwnProperty('payload')){
+            aux = obj.payload + "";
+        }
+        else if (obj.hasOwnProperty('uplink_message')) {
             if (obj.uplink_message.hasOwnProperty('frm_payload')) {
                 aux = obj.uplink_message.frm_payload + "";
             }
