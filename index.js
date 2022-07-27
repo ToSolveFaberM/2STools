@@ -171,14 +171,20 @@ exports.mapping = {
     Hist_DM: [0x8000 + 27, 8, null, "uint"],
     Total_DM: [0x8000 + 28, 8, null, "uint"],
 
-
+        
     /*** AMT ***/
     drainage_PH: [0x8000 + 29, 4, null, "float"],
     drainage_Turbidity: [0x8000 + 30, 4, null, "float"],
     drainage_Conductivity: [0x8000 + 31, 4, null, "float"],
     water_PH: [0x8000 + 32, 4, null, "float"],
     water_Turbidity: [0x8000 + 33, 4, null, "float"],
-    water_Conductivity: [0x8000 + 34, 4, null, "float"]
+    water_Conductivity: [0x8000 + 34, 4, null, "float"],
+
+    drainage_Temp: [0x8000 + 35, 4, null, "float"],
+    drainage_PH_SD: [0x8000 + 36, 4, null, "float"],
+    drainage_Turbidity_SD: [0x8000 + 37, 4, null, "float"],
+    drainage_Conductivity_SD: [0x8000 + 38, 4, null, "float"],
+    drainage_Temp_SD: [0x8000 + 39, 4, null, "float"],
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
