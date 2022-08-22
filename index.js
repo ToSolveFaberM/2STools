@@ -172,7 +172,6 @@ exports.mapping = {
     Total_DM: [0x8000 + 28, 8, null, "uint"],
 
         
-    /*** AMT ***/
     drainage_PH: [0x8000 + 29, 4, null, "float"],
     drainage_Turbidity: [0x8000 + 30, 4, null, "float"],
     drainage_Conductivity: [0x8000 + 31, 4, null, "float"],
