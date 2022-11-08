@@ -170,8 +170,6 @@ exports.mapping = {
     TP_DM: [0x8000 + 26, 8, null, "uint"],
     Hist_DM: [0x8000 + 27, 8, null, "uint"],
     Total_DM: [0x8000 + 28, 8, null, "uint"],
-
-        
     drainage_PH: [0x8000 + 29, 4, null, "float"],
     drainage_Turbidity: [0x8000 + 30, 4, null, "float"],
     drainage_Conductivity: [0x8000 + 31, 4, null, "float"],
@@ -189,8 +187,11 @@ exports.mapping = {
     water_Temp: [0x8000 + 43, 4, null, "float"],
     water_Temp_SD: [0x8000 + 44, 4, null, "float"],
     water_PH_SD: [0x8000 + 45, 4, null, "float"],
-    water_Press: [0x8000 + 46, 4, null, "float"],
-    water_Press_SD: [0x8000 + 47, 4, null, "float"]
+    water_level: [0x8000 + 46, 4, null, "float"],
+    water_level_SD: [0x8000 + 47, 4, null, "float"],
+    BatteryMon_IC: [0x8000 + 48, 4, null, "float"],
+    water_Press_ID: [0x8000 + 49, 4, null, "float"],
+    water_Press_SD: [0x8000 + 50, 4, null, "float"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
