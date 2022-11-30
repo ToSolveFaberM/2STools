@@ -191,7 +191,8 @@ exports.mapping = {
     water_level_SD: [0x8000 + 47, 4, null, "float"],
     BatteryMon_IC: [0x8000 + 48, 4, null, "float"],
     water_Press_ID: [0x8000 + 49, 4, null, "float"],
-    water_Press_SD: [0x8000 + 50, 4, null, "float"]
+    water_Press_SD: [0x8000 + 50, 4, null, "float"],
+    sw_st: [0x8000 + 51, 1, null, "uint"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
