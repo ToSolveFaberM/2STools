@@ -192,7 +192,30 @@ exports.mapping = {
     BatteryMon_IC: [0x8000 + 48, 4, null, "float"],
     water_Press_ID: [0x8000 + 49, 4, null, "float"],
     water_Press_SD: [0x8000 + 50, 4, null, "float"],
-    sw_st: [0x8000 + 51, 1, null, "uint"]
+    sw_st: [0x8000 + 51, 1, null, "uint"],
+    DI4_DM: [0x8000 + 52, 1, null, "uint"],
+    DI5_DM: [0x8000 + 53, 1, null, "uint"],
+    DI6_DM: [0x8000 + 54, 1, null, "uint"],
+    DI7_DM: [0x8000 + 55, 1, null, "uint"],
+    DI8_DM: [0x8000 + 56, 1, null, "uint"],
+    Modbus1Uint16_DM: [0x8000 + 57, 2, null, "uint"],
+    Modbus2Uint16_DM: [0x8000 + 58, 2, null, "uint"],
+    Modbus3Uint16_DM: [0x8000 + 59, 2, null, "uint"],
+    Modbus4Uint16_DM: [0x8000 + 60, 2, null, "uint"],
+    Modbus5Uint16_DM: [0x8000 + 61, 2, null, "uint"],
+    Modbus6Uint16_DM: [0x8000 + 62, 2, null, "uint"],
+    Modbus7Uint16_DM: [0x8000 + 63, 2, null, "uint"],
+    Modbus8Uint16_DM: [0x8000 + 64, 2, null, "uint"],
+    Modbus9Uint16_DM: [0x8000 + 65, 2, null, "uint"],
+    Modbus10Uint16_DM: [0x8000 + 66, 2, null, "uint"],
+    Modbus11Uint16_DM: [0x8000 + 67, 2, null, "uint"],
+    Modbus12Uint16_DM: [0x8000 + 68, 2, null, "uint"],
+    Modbus1float_DM: [0x8000 + 69, 4, null, "float"],
+    Modbus2float_DM: [0x8000 + 70, 4, null, "float"],
+    Modbus3float_DM: [0x8000 + 71, 4, null, "float"],
+    Modbus4float_DM: [0x8000 + 72, 4, null, "float"],
+    Modbus5float_DM: [0x8000 + 73, 4, null, "float"],
+    Modbus6float_DM: [0x8000 + 74, 4, null, "float"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
