@@ -141,6 +141,7 @@ exports.mapping = {
     ModMasterNode8Float_32: [126, 4, null, "int32"],
     ModMasterNode9Float_32: [127, 4, null, "int32"],
     ModMasterNode10Float_32: [128, 4, null, "int32"],
+    IO_ext: [129, 2, null, "uint"],
     DI1_DM: [0x8000 + 0, 1, null, "uint"],
     DI2_DM: [0x8000 + 1, 1, null, "uint"],
     DI3_DM: [0x8000 + 2, 1, null, "uint"],
