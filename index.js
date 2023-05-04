@@ -216,7 +216,37 @@ exports.mapping = {
     Modbus3float_DM: [0x8000 + 71, 4, null, "float"],
     Modbus4float_DM: [0x8000 + 72, 4, null, "float"],
     Modbus5float_DM: [0x8000 + 73, 4, null, "float"],
-    Modbus6float_DM: [0x8000 + 74, 4, null, "float"]
+    Modbus6float_DM: [0x8000 + 74, 4, null, "float"],
+    junta: [0x8000 + 75, 4, null, "uint"],
+    inspetor: [0x8000 + 76, 4, null, "uint"],
+    operador: [0x8000 + 77, 4, null, "uint"],
+    tempI: [0x8000 + 78, 4, null, "uint"],
+    tempP: [0x8000 + 79, 4, null, "uint"],
+    tempF: [0x8000 + 80, 4, null, "uint"],
+    timeP: [0x8000 + 81, 4, null, "uint"],
+    curvaA: [0x8000 + 82, 4, null, "uint"],
+    curvaD: [0x8000 + 83, 4, null, "uint"],
+    tolMin: [0x8000 + 84, 4, null, "uint"],
+    tolMax: [0x8000 + 85, 4, null, "uint"],
+    tolAscSup: [0x8000 + 86, 4, null, "uint"],
+    tolAscInf: [0x8000 + 87, 4, null, "uint"],
+    tolDescSup: [0x8000 + 88, 4, null, "uint"],
+    tolDescInf: [0x8000 + 89, 4, null, "uint"],
+    almTolMin: [0x8000 + 90, 4, null, "uint"],
+    almTolMax: [0x8000 + 91, 4, null, "uint"],
+    almAsc: [0x8000 + 92, 4, null, "uint"],
+    almDesc: [0x8000 + 93, 4, null, "uint"],
+    almPatamar: [0x8000 + 94, 4, null, "uint"],
+    aux1: [0x8000 + 95, 4, null, "uint"],
+    aux2: [0x8000 + 96, 4, null, "uint"],
+    aux3: [0x8000 + 97, 4, null, "uint"],
+    aux4: [0x8000 + 98, 4, null, "uint"],
+    aux5: [0x8000 + 99, 4, null, "uint"],
+    aux6: [0x8000 + 100, 4, null, "uint"],
+    aux7: [0x8000 + 101, 4, null, "uint"],
+    aux8: [0x8000 + 102, 4, null, "uint"],
+    aux9: [0x8000 + 103, 4, null, "uint"],
+    aux10: [0x8000 + 104, 4, null, "uint"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
@@ -230,14 +260,14 @@ exports.packetDecode = (rawdata, offset = 0) => {
             return obj;
         }
         var aux;
-        if(obj.hasOwnProperty('payload')){
+        if (obj.hasOwnProperty('payload')) {
             aux = obj.payload + "";
         }
         else if (obj.hasOwnProperty('uplink_message')) {
             if (obj.uplink_message.hasOwnProperty('frm_payload')) {
                 aux = obj.uplink_message.frm_payload + "";
             }
-        } 
+        }
         else if (obj.hasOwnProperty('data')) {
             if (obj.data.hasOwnProperty('uplink_message')) {
                 if (obj.data.uplink_message.hasOwnProperty('frm_payload')) {
@@ -267,7 +297,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
         payload = rawdata;
     }
 
-	console.log(payload)
+    console.log(payload)
     const data = (payload.toString()).trim()
 
     const isHex = /^[0-9a-fA-F]+$/;
