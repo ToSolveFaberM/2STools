@@ -236,7 +236,13 @@ exports.mapping = {
     Modbus3float_DM: [0x8000 + 72, 4, null, "float"],
     Modbus4float_DM: [0x8000 + 73, 4, null, "float"],
     Modbus5float_DM: [0x8000 + 74, 4, null, "float"],
-    Modbus6float_DM: [0x8000 + 75, 4, null, "float"]
+    Modbus6float_DM: [0x8000 + 75, 4, null, "float"],
+    channel_level: [0x8000 + 76, 4, null, "float"],
+    pump_press: [0x8000 + 77, 4, null, "float"],
+    ph_cal_timestamp: [0x8000 + 78, 8, null, "uint"],
+    turbidity_cal_timestamp: [0x8000 + 79, 8, null, "uint"],
+    conductivity_cal_timestamp: [0x8000 + 80, 8, null, "uint"],
+    rain_sensor: [0x8000 + 81, 2, null, "uint"]
 };
 
 exports.mappingKeys = Object.getOwnPropertyNames(this.mapping);
@@ -287,7 +293,6 @@ exports.packetDecode = (rawdata, offset = 0) => {
         payload = rawdata;
     }
 
-    console.log(payload)
     const data = (payload.toString()).trim()
 
     const isHex = /^[0-9a-fA-F]+$/;
