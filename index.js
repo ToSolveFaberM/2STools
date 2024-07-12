@@ -346,6 +346,7 @@ exports.packetDecode = (rawdata, offset = 0) => {
                 case "uint":
                     variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
 
+                    break;
                 case "uintHex":
                     variavel[2] = data.substring(i, i + variavel[1] * 2);
 
