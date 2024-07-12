@@ -166,6 +166,7 @@ exports.mapping = {
     IO_ext_board_DI2: [164, 1, null, "uint"],
     IO_ext_board_DI3: [165, 1, null, "uint"],
     IO_ext_board_DI4: [166, 1, null, "uint"],
+    PN532_NAME: [167, 20, null, "uint"],
     DI1_DM: [0x8000 + 1, 1, null, "uint"],
     DI2_DM: [0x8000 + 2, 1, null, "uint"],
     DI3_DM: [0x8000 + 3, 1, null, "uint"],
