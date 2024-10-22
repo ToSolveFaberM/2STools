@@ -1,6 +1,6 @@
 {
   "name": "2stools-daq",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Library with useful functions for our clients",
   "main": "index.js",
   "scripts": {
