@@ -170,6 +170,7 @@ exports.mapping = {
     IO_ext_board_DO1: [168, 1, null, "uint"],
     IO_ext_board_DO2: [169, 1, null, "uint"],
     IO_ext_board_DO3: [170, 1, null, "uint"],
+    timed: [171, 4, null, "float"],
     DI1_DM: [0x8000 + 1, 1, null, "uint"],
     DI2_DM: [0x8000 + 2, 1, null, "uint"],
     DI3_DM: [0x8000 + 3, 1, null, "uint"],
