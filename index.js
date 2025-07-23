@@ -30,7 +30,7 @@ exports.mapping = {
     HTU21DTemp: [15, 4, null, "float"],
     HTU21DHum: [16, 4, null, "float"],
     RC522_UID_size: [17, 1, null, "uint"],
-    RC522_UID: [18, 10, null, "uint"],
+    RC522_UID: [18, 10, null, "uintHex"],
     angleX_f: [19, 4, null, "float"],
     angleY_f: [20, 4, null, "float"],
     Dilnp0: [21, 2, null, "uint"],
@@ -50,7 +50,7 @@ exports.mapping = {
     ModMasterNode9: [35, 2, null, "uint"],
     ModMasterNode10: [36, 2, null, "uint"],
     PN532_UID_size: [37, 1, null, "uint"],
-    PN532_UID: [38, 10, null, "uint"],
+    PN532_UID: [38, 10, null, "uintHex"],
     Exttemp1: [39, 4, null, "float"],
     Exttemp2: [40, 4, null, "float"],
     Exttemp3: [41, 4, null, "float"],
@@ -166,7 +166,12 @@ exports.mapping = {
     IO_ext_board_DI2: [164, 1, null, "uint"],
     IO_ext_board_DI3: [165, 1, null, "uint"],
     IO_ext_board_DI4: [166, 1, null, "uint"],
-    PN532_NAME: [167, 20, null, "uint"],
+    PN532_NAME: [167, 20, null, "uintHex"],
+    IO_ext_board_DO1: [168, 1, null, "uint"],
+    IO_ext_board_DO2: [169, 1, null, "uint"],
+    IO_ext_board_DO3: [170, 1, null, "uint"],
+    timed: [171, 4, null, "float"],
+    Sig_Quality: [172, 4, null, "float"],
     DI1_DM: [0x8000 + 1, 1, null, "uint"],
     DI2_DM: [0x8000 + 2, 1, null, "uint"],
     DI3_DM: [0x8000 + 3, 1, null, "uint"],
@@ -345,6 +350,10 @@ exports.packetDecode = (rawdata, offset = 0) => {
                     break;
                 case "uint":
                     variavel[2] = hexToDec(data.substring(i, i + variavel[1] * 2));
+
+                    break;
+                case "uintHex":
+                    variavel[2] = data.substring(i, i + variavel[1] * 2);
 
                     break;
                 case "int16":
